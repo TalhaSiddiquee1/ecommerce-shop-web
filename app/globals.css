@@ -15,6 +15,7 @@
   --color-shop-dark-color: #151515;
   --color-shop-light-color: #52525b;
   --color-shop-light-orange: #fca99b;
+  --color-shop-light-green: #3b9c3c;
 }
 
 @theme inline {
@@ -133,5 +134,8 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  .hoverEffect {
+    @apply transition-all duration-300 ease-in-out;
   }
 }
