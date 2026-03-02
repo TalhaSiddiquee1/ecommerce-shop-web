@@ -434,3 +434,18 @@ export type AllSanitySchemaTypes =
   | Geopoint;
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
+
+// Source: sanity/queries/query.ts
+// Variable: BRANDS_QUERY
+// Query: *[_type == "brand"] | order(title asc) {title}
+export type BRANDS_QUERY_RESULT = Array<{
+  title: string | null;
+}>;
+
+// Query TypeMap
+import '@sanity/client';
+declare module '@sanity/client' {
+  interface SanityQueries {
+    '*[_type == "brand"] | order(title asc) {title}': BRANDS_QUERY_RESULT;
+  }
+}
