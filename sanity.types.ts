@@ -437,15 +437,57 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 
 // Source: sanity/queries/query.ts
 // Variable: BRANDS_QUERY
-// Query: *[_type == "brand"] | order(title asc) {title}
+// Query: *[_type == "brand"] | order(title asc){    _id,    title,    slug,    "imageUrl": coalesce(image.asset->url, logo.asset->url),    "mimeType": coalesce(image.asset->mimeType, logo.asset->mimeType)  }
 export type BRANDS_QUERY_RESULT = Array<{
+  _id: string;
   title: string | null;
+  slug: Slug | null;
+  imageUrl: string | null;
+  mimeType: string | null;
+}>;
+
+// Source: sanity/queries/query.ts
+// Variable: LATEST_BLOG_QUERY
+// Query: *[_type == 'blog' && isLatest == true]|order(name asc){      ...,      blogcategories[]->{      title    }    }
+export type LATEST_BLOG_QUERY_RESULT = Array<{
+  _id: string;
+  _type: 'blog';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  author?: {
+    _ref: string;
+    _type: 'reference';
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: 'author';
+  };
+  mainImage?: {
+    asset?: {
+      _ref: string;
+      _type: 'reference';
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: 'sanity.imageAsset';
+    };
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: 'image';
+  };
+  blogcategories: Array<{
+    title: string | null;
+  }> | null;
+  publishedAt?: string;
+  isLatest: true;
+  body?: BlockContent;
 }>;
 
 // Query TypeMap
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    '*[_type == "brand"] | order(title asc) {title}': BRANDS_QUERY_RESULT;
+    '\n  *[_type == "brand"] | order(title asc){\n    _id,\n    title,\n    slug,\n    "imageUrl": coalesce(image.asset->url, logo.asset->url),\n    "mimeType": coalesce(image.asset->mimeType, logo.asset->mimeType)\n  }\n': BRANDS_QUERY_RESULT;
+    " *[_type == 'blog' && isLatest == true]|order(name asc){\n      ...,\n      blogcategories[]->{\n      title\n    }\n    }": LATEST_BLOG_QUERY_RESULT;
   }
 }

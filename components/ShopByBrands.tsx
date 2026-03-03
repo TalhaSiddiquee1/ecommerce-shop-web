@@ -1,10 +1,9 @@
 import React from 'react';
 import { Title } from './ui/text';
 import Link from 'next/link';
-import Image from 'next/image';
 import { getAllBrands } from '@/sanity/queries';
-import { urlFor } from '@/sanity/lib/image';
 import { Truck, GitCompareArrows, Headset, ShieldCheck } from 'lucide-react';
+import Image from 'next/image';
 
 const extraData = [
   {
@@ -31,36 +30,47 @@ const extraData = [
 
 const ShopByBrands = async () => {
   const brands = await getAllBrands();
+
   return (
-    <div className="mb-10 lg:pb-20 bg-shop-light-bg p-5 lg:p-7 rounded-md">
+    <div className="mb-10 lg:mb-20 bg-shop-light-bg p-5 lg:p-7 rounded-md">
       <div className="flex items-center gap-5 justify-between mb-10">
         <Title>Shop By Brands</Title>
         <Link
-          href={'/shop'}
+          href="/shop"
           className="text-sm font-semibold tracking-wide hover:text-shop-btn-dark-green hoverEffect"
         >
           View all
         </Link>
       </div>
+
       <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-2.5">
-        {brands?.map((brand) => (
-          <Link
-            key={brand?.slug?.current}
-            href={`/brand/${brand?.slug?.current}`}
-            className="bg-white w-34 h-24 flex items-center justify-center rounded-md overflow-hidden hover:shadow-lg shadow-shop-dark-green/20 hoverEffect"
-          >
-            {brand?.image && (
-              <Image
-                src={urlFor(brand?.image).url()}
-                alt="brandImage"
-                width={250}
-                height={250}
-                className="w-32 h-20 object-contain"
-              />
-            )}
-          </Link>
-        ))}
+        {brands?.map((brand: any) => {
+          const src = brand?.imageUrl;
+          return (
+            <Link
+              key={brand?._id}
+              href={
+                brand?.slug?.current ? `/brand/${brand.slug.current}` : '/shop'
+              }
+              className="bg-white w-full h-24 flex items-center justify-center rounded-md overflow-hidden hover:shadow-lg shadow-shop-dark-green/20 hoverEffect"
+            >
+              {src ? (
+                <Image
+                  src={src}
+                  alt={brand?.title || 'brandImage'}
+                  loading="lazy"
+                  width={250}
+                  height={250}
+                  className="w-32 h-20 object-contain"
+                />
+              ) : (
+                <span className="text-xs text-shop-light-text">No image</span>
+              )}
+            </Link>
+          );
+        })}
       </div>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mt-16 p-2 shadow-sm hover:shadow-shop-light-green/20 py-5">
         {extraData?.map((item, index) => (
           <div
