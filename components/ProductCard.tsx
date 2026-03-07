@@ -14,6 +14,7 @@ const ProductCard = ({ product }: { product: Product }) => {
     <div className="text-sm border-[1px] border-shop-dark-blue/20 rounded-md bg-white group">
       <div className="relative group overflow-hidden bg-shop-light-bg">
         {product?.images && (
+          <Link href={`/product/${product?.slug?.current}`}>
           <Image
             src={urlFor(product?.images[0]).url()}
             alt="ProductImage"
@@ -22,6 +23,7 @@ const ProductCard = ({ product }: { product: Product }) => {
             height={700}
             className={`w-full h-64 object-contain overflow-hidden transition-transform bg-shop-light-bg hoverEffect ${product?.stock !== 0 ? 'group-hover:scale-105' : 'opacity-50'}`}
           />
+          </Link>
         )}
         <AddToWishlistButton product={product} className="" />
         {product?.status === 'sale' && (
