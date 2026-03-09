@@ -1,6 +1,6 @@
 'use client';
 import { Product } from '@/sanity.types';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Button } from './ui/button';
 import { ShoppingBag } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -17,7 +17,7 @@ const AddToCartButton = ({ product, className }: Props) => {
     window.alert(`Added ${product?.name} to cart!`);
   };
   return (
-    <div>
+    <div className="w-full">
       <Button
         onClick={handleAddToCart}
         disabled={isOutOfStock}
