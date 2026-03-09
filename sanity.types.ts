@@ -438,7 +438,7 @@ export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: sanity/queries/query.ts
 // Variable: BRANDS_QUERY
 // Query: *[_type == "brand"] | order(title asc){    _id,    title,    slug,    "imageUrl": coalesce(image.asset->url, logo.asset->url),    "mimeType": coalesce(image.asset->mimeType, logo.asset->mimeType)  }
-export type BRANDS_QUERY_RESULT = Array<{
+export type BRANDS_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
@@ -573,7 +573,7 @@ export type PRODUCT_BY_SLUG_QUERY_RESULT = {
 import '@sanity/client';
 declare module '@sanity/client' {
   interface SanityQueries {
-    '\n  *[_type == "brand"] | order(title asc){\n    _id,\n    title,\n    slug,\n    "imageUrl": coalesce(image.asset->url, logo.asset->url),\n    "mimeType": coalesce(image.asset->mimeType, logo.asset->mimeType)\n  }\n': BRANDS_QUERY_RESULT;
+    '\n  *[_type == "brand"] | order(title asc){\n    _id,\n    title,\n    slug,\n    "imageUrl": coalesce(image.asset->url, logo.asset->url),\n    "mimeType": coalesce(image.asset->mimeType, logo.asset->mimeType)\n  }\n': BRANDS_QUERYResult;
     " *[_type == 'blog' && isLatest == true]|order(name asc){\n      ...,\n      blogcategories[]->{\n      title\n    }\n    }": LATEST_BLOG_QUERY_RESULT;
     "*[_type == 'product' && status == 'hot'] | order(name asc){\n    ...,\"categories\": categories[]->title\n  }": DEAL_PRODUCTS_RESULT;
     '*[_type == "product" && slug.current == $slug] | order(name asc) [0]': PRODUCT_BY_SLUG_QUERY_RESULT;
