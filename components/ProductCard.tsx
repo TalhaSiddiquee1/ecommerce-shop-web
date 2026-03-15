@@ -8,6 +8,7 @@ import { Title } from './ui/text';
 import { Product } from '@/sanity.types';
 import PriceView from './PriceView';
 import AddToCartButton from './AddToCartButton';
+import ProductSideMenu from './ProductSideMenu';
 
 const ProductCard = ({ product }: { product: Product }) => {
   return (
@@ -18,14 +19,13 @@ const ProductCard = ({ product }: { product: Product }) => {
           <Image
             src={urlFor(product?.images[0]).url()}
             alt="ProductImage"
-            loading="lazy"
-            width={700}
-            height={700}
+            width={500}
+            height={500}
             className={`w-full h-64 object-contain overflow-hidden transition-transform bg-shop-light-bg hoverEffect ${product?.stock !== 0 ? 'group-hover:scale-105' : 'opacity-50'}`}
           />
           </Link>
         )}
-        <AddToWishlistButton product={product} className="" />
+        <ProductSideMenu product={product} />
         {product?.status === 'sale' && (
           <p className="absolute top-2 left-2 z-10 text-xs border border-shop-dark-color/50 px-2 rounded-full group-hover:border-shop-light-green group-hover:text-shop-light-green hoverEffect">
             Sale!

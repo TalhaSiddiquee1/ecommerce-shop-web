@@ -8,9 +8,10 @@ import useStore from '@/store';
 import toast from 'react-hot-toast';
 import { div } from 'motion/react-client';
 import PriceFormatter from './PriceFormater';
+import QuantityButtons from './QuantityButtons';
 
 interface Props {
-  product: Product;
+  product: any;
   className?: string;
 }
 
@@ -30,14 +31,16 @@ const AddToCartButton = ({ product, className }: Props) => {
   return (
     <div className="w-full">
       {itemCount ? (
-        <div>
-          <div>
-            <span>Quantity</span>
-            buttons
+        <div className="text-sm w-full">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-shop-dark-color/80">Quantity</span>
+            <QuantityButtons product={product} />
           </div>
-          <div>
-            <span>Subtotal</span>
-            <PriceFormatter amount={product?.price ? product?.price * itemCount : 0} />
+          <div className="flex items-center justify-between border-t pt-1">
+            <span className="text-xs font-semibold">Subtotal</span>
+            <PriceFormatter
+              amount={product?.price ? product?.price * itemCount : 0}
+            />
           </div>
         </div>
       ) : (
