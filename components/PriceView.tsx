@@ -1,5 +1,5 @@
 import React from 'react';
-import PriceFormatter from './PriceFormater';
+import PriceFormatter from './PriceFormatter';
 
 interface Props {
   price?: number | undefined;
