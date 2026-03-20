@@ -41,11 +41,11 @@ const OrderDetailDialog: React.FC<OrderDetailsDialogProps> = ({
             <strong>Email:</strong> {order.email}
           </p>
           <p>
-            <strong>Date:</strong>{" "}
+            <strong>Date:</strong>{' '}
             {order.orderDate && new Date(order.orderDate).toLocaleDateString()}
           </p>
           <p>
-            <strong>Status:</strong>{" "}
+            <strong>Status:</strong>{' '}
             <span className="capitalize text-green-600 font-medium">
               {order.status}
             </span>
@@ -54,7 +54,7 @@ const OrderDetailDialog: React.FC<OrderDetailsDialogProps> = ({
             <strong>Invoice Number:</strong> {order?.invoice?.number}
           </p>
           {order?.invoice && (
-            <Button className="bg-transparent border text-darkColor/80 mt-2 hover:text-darkColor hover:border-darkColor hover:bg-darkColor/10 hoverEffect ">
+            <Button className="bg-transparent border text-shop-dark-color/80 mt-2 hover:text-shop-dark-color hover:border-shop-dark-color hover:bg-shop-dark-color/10 hoverEffect ">
               {order?.invoice?.hosted_invoice_url && (
                 <Link href={order?.invoice?.hosted_invoice_url} target="_blank">
                   Download Invoice
