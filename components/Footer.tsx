@@ -57,21 +57,22 @@ const Footer = () => {
               ))}
             </ul>
           </div>
-          <div className='space-y-4'>
+          <div className="space-y-4">
             <SubTitle>Newsletter</SubTitle>
             <SubText>
-              Subscribe to our newsletter to get updates on our latest offers and
-              products.
+              Subscribe to our newsletter to get updates on our latest offers
+              and products.
             </SubText>
-            <form className='space-y-3'>
-              <Input placeholder="Enter your email" type='email' required />
-              <Button className='w-full'>Subscribe</Button>
+            <form className="space-y-3">
+              <Input placeholder="Enter your email" type="email" required />
+              <Button className="w-full">Subscribe</Button>
             </form>
           </div>
         </div>
-        <div className='py-6 border-t text-center text-sm text-gray-600'>
+        <div className="py-6 border-t text-center text-sm text-gray-600">
           <div>
-              &copy; {new Date().getFullYear()} <Logo className='text-sm' />. All rights reserved.
+            &copy; {new Date().getFullYear()} <Logo className="text-sm" />. All
+            rights reserved.
           </div>
         </div>
       </Container>
