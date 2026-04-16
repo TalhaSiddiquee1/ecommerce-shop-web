@@ -115,16 +115,14 @@ const Shop = ({ categories, brands }: Props) => {
                     Product is loading . . .
                   </p>
                 </div>
+              ) : products?.length > 0 ? (
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5">
+                  {products.map((product) => (
+                    <ProductCard key={product._id} product={product} />
+                  ))}
+                </div>
               ) : (
-                  products?.length > 0 ? (
-                    <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5'>
-                      {products.map((product) => (
-                        <ProductCard key={product._id} product={product} />
-                      ))}
-                    </div>
-                  ) : (
-                    <NoProductAvailable className="bg-white mt-0" />
-                  )
+                <NoProductAvailable className="bg-white mt-0" />
               )}
             </div>
           </div>
