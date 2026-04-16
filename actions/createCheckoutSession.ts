@@ -19,6 +19,21 @@ export interface GroupedCartItems {
   quantity: number;
 }
 
+function getSiteUrl() {
+  const configuredUrl = process.env.NEXT_PUBLIC_BASE_URL?.trim();
+
+  if (configuredUrl) {
+    return configuredUrl.replace(/\/$/, '');
+  }
+
+  const vercelUrl = process.env.VERCEL_URL?.trim();
+  if (vercelUrl) {
+    return `https://${vercelUrl.replace(/\/$/, '')}`;
+  }
+
+  return 'http://localhost:3000';
+}
+
 export async function createCheckoutSession(
   items: GroupedCartItems[],
   metadata: Metadata
@@ -45,10 +60,8 @@ export async function createCheckoutSession(
       invoice_creation: {
         enabled: true,
       },
-      success_url: `${
-        process.env.NEXT_PUBLIC_BASE_URL
-      }/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/cart`,
+      success_url: `${getSiteUrl()}/success?session_id={CHECKOUT_SESSION_ID}&orderNumber=${metadata.orderNumber}`,
+      cancel_url: `${getSiteUrl()}/cart`,
       line_items: items?.map((item) => ({
         price_data: {
           currency: 'USD',
